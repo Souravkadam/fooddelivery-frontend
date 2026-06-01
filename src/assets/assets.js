@@ -5,7 +5,7 @@ import biryani from './biryani.png';
 import burger from './burger.png';
 import icecream from './icecream.png'
 import pizza from './pizza.jpg';
-import rolls from './rolls.png';
+import rolls from './Rolls.png';
 import salad from './salad.png';
 import chicken from './chicken.png';
 import profile from './profile.png';
