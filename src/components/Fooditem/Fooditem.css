@@ -1,0 +1,132 @@
+.food-card {
+  border-radius: 16px !important;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: white;
+  cursor: pointer;
+}
+
+.food-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.13) !important;
+}
+
+.food-card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 190px;
+}
+
+.food-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.food-card:hover .food-card-img { transform: scale(1.07); }
+
+.food-qty-badge {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 50px;
+  background: #ff6b35 !important;
+  box-shadow: 0 2px 8px rgba(255,107,53,0.4);
+}
+
+.food-category-tag {
+  position: absolute;
+  top: 10px; left: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.92);
+  color: #ff6b35;
+  backdrop-filter: blur(4px);
+}
+
+.food-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+  color: #888;
+  font-size: 0.82rem;
+}
+
+.food-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.78rem;
+  color: #f59e0b;
+}
+
+.food-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ff6b35;
+}
+
+/* Cart controls */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff4f0;
+  border-radius: 50px;
+  padding: 2px;
+}
+
+.qty-btn {
+  width: 32px; height: 32px;
+  border-radius: 50% !important;
+  border: none !important;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.qty-btn-minus {
+  background: white !important;
+  color: #ff6b35 !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.qty-btn-plus {
+  background: #ff6b35 !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(255,107,53,0.35);
+}
+
+.qty-btn:hover { transform: scale(1.1); }
+
+.qty-value {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ff6b35;
+  min-width: 24px;
+  text-align: center;
+}
+
+.add-btn {
+  border-radius: 50px !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  background: #ff6b35 !important;
+  border-color: #ff6b35 !important;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background: #e85520 !important;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(255,107,53,0.35);
+}

@@ -1,0 +1,13 @@
+.order-card {
+  border-radius: 14px !important;
+  transition: box-shadow 0.2s;
+}
+.order-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1) !important; }
+
+.order-status-badge {
+  font-size: 0.78rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
