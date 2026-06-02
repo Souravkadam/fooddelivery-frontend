@@ -116,7 +116,7 @@ Create a `.env` file in the `Frontend/` folder:
 
 ```env
 VITE_API_BASE_URL=http://localhost:8080/api
-VITE_RAZORPAY_KEY=rzp_test_SkCF8SuhtObi2q
+VITE_RAZORPAY_KEY=your_razorpay_key_id
 ```
 
 | Variable | Description |
@@ -235,7 +235,7 @@ git push -u origin main
 ### Step 3 — Add Environment Variables in Vercel
 ```
 VITE_API_BASE_URL = https://your-backend.onrender.com/api
-VITE_RAZORPAY_KEY = rzp_test_SkCF8SuhtObi2q
+VITE_RAZORPAY_KEY = your_razorpay_key_id
 ```
 
 ### Step 4 — Deploy ✅
