@@ -7,7 +7,7 @@ const FoodDisplay = ({ category, searchText }) => {
 
   const filteredFoods = foodList.filter(
     food =>
-      (category === 'All' || food.category === category) &&
+      (category === 'All' || food.category?.toLowerCase() === category?.toLowerCase()) &&
       food.name.toLowerCase().includes((searchText || '').toLowerCase())
   );
 

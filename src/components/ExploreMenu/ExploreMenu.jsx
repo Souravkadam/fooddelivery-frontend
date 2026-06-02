@@ -10,21 +10,25 @@ const ExploreMenu = ({ category, setCategory }) => {
   // Get all unique categories from actual food data
   const foodCategories = [...new Set(foodList.map(f => f.category).filter(Boolean))];
 
-  // Build display list: known categories with icons first, then any extra from food data
-  const knownCats = categories.map(c => c.category);
-  const extraCats = foodCategories.filter(c => !knownCats.includes(c)).sort();
+  // Known categories with icons
+  const knownCats = categories.map(c => c.category.toLowerCase());
 
-  // Extra categories without icons use emoji placeholder
-  const extraItems = extraCats.map(c => ({ category: c, icon: null }));
+  // Extra categories not in the known list
+  const extraCats = foodCategories.filter(c => !knownCats.includes(c.toLowerCase())).sort();
+
+  // For extra categories, use first food image in that category
+  const extraItems = extraCats.map(cat => {
+    const firstFood = foodList.find(f => f.category === cat);
+    return { category: cat, icon: null, imageUrl: firstFood?.imageUrl || null };
+  });
+
   const allItems = [...categories, ...extraItems];
 
-  const scrollLeft = () => {
-    menuRef.current?.scrollBy({ left: -200, behavior: 'smooth' });
-  };
+  const scrollLeft = () => menuRef.current?.scrollBy({ left: -200, behavior: 'smooth' });
+  const scrollRight = () => menuRef.current?.scrollBy({ left: 200, behavior: 'smooth' });
 
-  const scrollRight = () => {
-    menuRef.current?.scrollBy({ left: 200, behavior: 'smooth' });
-  };
+  // Case-insensitive active check
+  const isActive = (itemCat) => category?.toLowerCase() === itemCat?.toLowerCase();
 
   return (
     <div className="explore-menu position-relative">
@@ -38,17 +42,14 @@ const ExploreMenu = ({ category, setCategory }) => {
 
       <p>Explore curated lists of dishes from top categories</p>
 
-      <div
-        className="d-flex gap-4 overflow-auto explore-menu-list"
-        ref={menuRef}
-      >
+      <div className="d-flex gap-4 overflow-auto explore-menu-list" ref={menuRef}>
         {allItems.map((item, index) => (
           <div
             key={index}
             className="text-center explore-menu-list-item flex-shrink-0"
             onClick={() =>
               setCategory(prev =>
-                prev === item.category ? 'All' : item.category
+                prev?.toLowerCase() === item.category?.toLowerCase() ? 'All' : item.category
               )
             }
           >
@@ -56,23 +57,31 @@ const ExploreMenu = ({ category, setCategory }) => {
               <img
                 src={item.icon}
                 alt={item.category}
-                className={
-                  item.category === category
-                    ? 'rounded-circle active'
-                    : 'rounded-circle'
-                }
+                className={isActive(item.category) ? 'rounded-circle active' : 'rounded-circle'}
                 height={128}
                 width={128}
+                style={{ objectFit: 'cover' }}
+              />
+            ) : item.imageUrl ? (
+              <img
+                src={item.imageUrl}
+                alt={item.category}
+                className={isActive(item.category) ? 'rounded-circle active' : 'rounded-circle'}
+                height={128}
+                width={128}
+                style={{ objectFit: 'cover' }}
               />
             ) : (
               <div
-                className={`rounded-circle d-flex align-items-center justify-content-center ${item.category === category ? 'active-cat-circle' : 'cat-circle'}`}
-                style={{ width: 128, height: 128, fontSize: '2.5rem', background: '#f8f9fa', border: item.category === category ? '3px solid #f97316' : '3px solid #dee2e6' }}
+                className={isActive(item.category) ? 'rounded-circle active' : 'rounded-circle'}
+                style={{ width: 128, height: 128, background: '#f8f9fa', border: '3px solid #dee2e6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}
               >
                 🍽️
               </div>
             )}
-            <p className="mt-2 fw-bold" style={{fontSize:'0.8rem', maxWidth:128, wordBreak:'break-word'}}>{item.category}</p>
+            <p className="mt-2 fw-bold" style={{ fontSize: '0.8rem', maxWidth: 128, wordBreak: 'break-word' }}>
+              {item.category}
+            </p>
           </div>
         ))}
       </div>
