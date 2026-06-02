@@ -1,17 +1,10 @@
-# 🍔 Foodies — Food Delivery Frontend
+# Foodies — Food Delivery Frontend
 
-A modern, responsive **Customer-facing Food Delivery Web App** built with **React + Vite**.  
-Users can browse food, manage their cart, place orders, and pay securely via **Razorpay**.
-
----
-
-## 📸 Screenshots
-
-> Add your screenshots here after deployment
+Customer-facing food delivery web app built with React + Vite. Users can browse food, manage their cart, place orders, and pay via Razorpay.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
@@ -27,142 +20,125 @@ Users can browse food, manage their cart, place orders, and pay securely via **R
 
 ---
 
-## 📁 Folder Structure
+## Project Structure
 
 ```
 Frontend/
-├── public/
-│   └── vite.svg
 ├── src/
 │   ├── assets/
-│   │   └── assets.js              # Food categories & static assets
+│   │   └── assets.js              # Food category icons & static assets
 │   ├── components/
 │   │   ├── Menubar/               # Top navigation bar
 │   │   ├── Header/                # Hero banner
-│   │   ├── ExploreMenu/           # Category filter
-│   │   ├── FoodDisplay/           # Food grid with filters
+│   │   ├── ExploreMenu/           # Dynamic category filter (from live food data)
+│   │   ├── FoodDisplay/           # Food grid with category + search filter
 │   │   ├── Fooditem/              # Individual food card
 │   │   ├── Footer/                # Footer
-│   │   ├── Login/                 # Login modal/page
+│   │   ├── Login/                 # Login modal
 │   │   ├── Register/              # Register page
 │   │   └── service/
 │   │       ├── authService.js     # Login & Register API calls
 │   │       ├── foodService.js     # Food listing API calls
 │   │       └── cartService.js     # Cart API calls
 │   ├── context/
-│   │   └── StoreContext.jsx       # Global state (cart, token, foods)
+│   │   └── StoreContext.jsx       # Global state — cart, token, food list
 │   ├── pages/
-│   │   ├── Home/                  # Landing page
-│   │   ├── ExploreFood/           # Browse all food
-│   │   ├── FoodDetails/           # Single food detail
+│   │   ├── Home/                  # Landing page with explore menu
+│   │   ├── ExploreFood/           # Browse all food with dynamic category dropdown
+│   │   ├── FoodDetails/           # Single food detail view
 │   │   ├── Cart/                  # Cart page
-│   │   ├── PlaceOrder/            # Checkout + Razorpay
+│   │   ├── PlaceOrder/            # Checkout + Razorpay payment
 │   │   ├── MyOrders/              # Order history
 │   │   └── Contact/               # Contact page
 │   ├── util/
-│   │   ├── contants.js            # API base URL, Razorpay key
+│   │   ├── contants.js            # Reads API URL from env
 │   │   └── CartUtil.js            # Cart total calculation
 │   ├── App.jsx                    # Routes
-│   ├── App.css
 │   ├── main.jsx                   # Entry point
 │   └── index.css
-├── .env                           # Environment variables
 ├── index.html
 ├── package.json
-├── vercel.json                    # Vercel SPA routing config
+├── vercel.json
 └── vite.config.js
 ```
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔐 Authentication
-- User Registration with name, email, password
-- JWT-based Login
+### Authentication
+- User registration with name, email, password
+- JWT-based login
 - Auto-logout on token expiry
 - Protected routes (Cart, Orders, Checkout)
 
-### 🍕 Food Browsing
-- Display all food items from backend
-- Filter by category (Biryani, Burger, Pizza, Rolls, etc.)
+### Food Browsing
+- All food items loaded from backend
+- Dynamic category filter — categories update automatically when admin adds new food
 - Search food by name
 - Responsive food cards with image, price, rating
 
-### 🛒 Cart Management
+### Cart Management
 - Add / remove items
 - Increase / decrease quantity
 - Synced with backend (persists on refresh)
 - Live subtotal, delivery fee, tax calculation
 
-### 💳 Order & Payment
+### Order & Payment
 - Delivery address form with validation
 - Razorpay payment gateway integration
 - Payment success → order confirmed
 - Payment cancel → order deleted automatically
 
-### 📦 Order History
+### Order History
 - View all past orders
-- Order status badges (Preparing / Confirmed / Delivered)
-
-### 🔔 Notifications
-- Toast alerts for all actions (login, cart, errors)
+- Order status badges
 
 ---
 
-## ⚙️ Environment Variables
-
-Create a `.env` file in the `Frontend/` folder:
-
-```env
-VITE_API_BASE_URL=http://localhost:8080/api
-VITE_RAZORPAY_KEY=your_razorpay_key_id
-```
-
-| Variable | Description |
-|----------|-------------|
-| `VITE_API_BASE_URL` | Backend REST API base URL |
-| `VITE_RAZORPAY_KEY` | Razorpay public key (test/live) |
-
----
-
-## 🚀 Local Setup
+## Local Setup
 
 ### Prerequisites
 - Node.js 18+
-- npm 9+
 - Backend running on port 8080
 
 ### Steps
 
 ```bash
-# 1. Navigate to Frontend folder
 cd Frontend
-
-# 2. Install dependencies
 npm install
-
-# 3. Create environment file
-# (already exists — edit if needed)
-
-# 4. Start development server
 npm run dev
 ```
 
 App runs at **http://localhost:5173**
 
+### Required Environment Variables
+
+Set these in your deployment platform (Vercel) or locally before running:
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_API_BASE_URL` | Backend REST API base URL |
+| `VITE_RAZORPAY_KEY` | Razorpay public key ID |
+
+For local development, create a `.env` file (never commit it):
+```
+VITE_API_BASE_URL=http://localhost:8080/api
+VITE_RAZORPAY_KEY=your_razorpay_key_here
+```
+
 ### Available Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start dev server (port 5173) |
-| `npm run build` | Build for production → `dist/` |
+| `npm run dev` | Start dev server |
+| `npm run build` | Build for production |
 | `npm run preview` | Preview production build |
 | `npm run lint` | Run ESLint |
 
 ---
 
-## 🌐 API Endpoints Used
+## API Endpoints Used
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -181,90 +157,67 @@ App runs at **http://localhost:5173**
 
 ---
 
-## 🔄 State Management
+## State Management
 
-Global state is managed via **React Context API** (`StoreContext`):
+Global state via React Context API (`StoreContext`):
 
 ```
-StoreContext provides:
-├── foodList          → All food items from API
-├── quantities        → Cart items { foodId: qty }
-├── token             → JWT auth token
-├── loading           → Food list loading state
-├── increaseQty()     → Add to cart
-├── decreaseQty()     → Remove from cart
-├── removeFromCart()  → Remove item entirely
-├── loadCartData()    → Sync cart from backend
-└── setToken()        → Update auth token
+foodList        → All food items from API
+quantities      → Cart items { foodId: qty }
+token           → JWT auth token
+loading         → Food list loading state
+increaseQty()   → Add to cart
+decreaseQty()   → Remove from cart
+removeFromCart()→ Remove item entirely
+loadCartData()  → Sync cart from backend
+setToken()      → Update auth token
 ```
 
 ---
 
-## 💳 Payment Flow (Razorpay)
+## Payment Flow
 
 ```
-1. User fills delivery form
-2. POST /api/orders/create  →  gets razorpayOrderId
-3. Razorpay checkout opens
-4. User pays
+1. User fills delivery address form
+2. POST /api/orders/create  →  gets Razorpay order ID
+3. Razorpay checkout opens in browser
+4. User completes payment
 5. POST /api/orders/verify  →  payment confirmed
-6. Cart cleared → redirect to /myorders
-7. If cancelled → DELETE /api/orders/:id
+6. Cart cleared → redirected to /myorders
+7. If payment cancelled → DELETE /api/orders/:id
 ```
 
 ---
 
-## 🚢 Deployment (Vercel)
+## Deployment (Vercel)
 
-### Step 1 — Push to GitHub
-```bash
-git init
-git add .
-git commit -m "food delivery frontend"
-git remote add origin https://github.com/YOUR_USERNAME/fooddelivery-frontend.git
-git push -u origin main
-```
+1. Push code to GitHub
+2. Go to vercel.com → New Project → Import repo
+3. Framework: Vite | Build: `npm run build` | Output: `dist`
+4. Add environment variables in Vercel dashboard:
+   - `VITE_API_BASE_URL` → your Render backend URL + `/api`
+   - `VITE_RAZORPAY_KEY` → your Razorpay key ID
+5. Deploy
 
-### Step 2 — Deploy on Vercel
-1. Go to [vercel.com](https://vercel.com) → **New Project**
-2. Import your GitHub repo
-3. Framework: **Vite**
-4. Build Command: `npm run build`
-5. Output Directory: `dist`
-
-### Step 3 — Add Environment Variables in Vercel
-```
-VITE_API_BASE_URL = https://your-backend.onrender.com/api
-VITE_RAZORPAY_KEY = your_razorpay_key_id
-```
-
-### Step 4 — Deploy ✅
-
-The `vercel.json` file handles SPA routing automatically:
-```json
-{
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
-```
+The `vercel.json` handles SPA routing automatically.
 
 ---
 
-## 🔗 Related Projects
+## Related Projects
 
-| Project | Description | Repo |
-|---------|-------------|------|
-| Backend | Spring Boot REST API | [fooddelivery-backend](#) |
-| Admin Panel | React Admin Dashboard | [fooddelivery-admin](#) |
-
----
-
-## 👨‍💻 Author
-
-**Sourav Kadam**  
-BCA Final Year Project  
+| Project | Description |
+|---------|-------------|
+| Backend | Spring Boot REST API |
+| Admin Panel | React Admin Dashboard |
 
 ---
 
-## 📄 License
+## Author
+
+Sourav Kadam — BCA Final Year Project
+
+---
+
+## License
 
 This project is for educational purposes.
