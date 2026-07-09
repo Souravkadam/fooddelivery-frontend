@@ -96,9 +96,6 @@ const PlaceOrder = () => {
   };
 
   const initiateRazorPayment = (order) => {
-    // Sanitize phone — strip +91, spaces, dashes, keep only digits, max 10
-    const rawPhone = (data.phoneNumber || "").replace(/\D/g, "").slice(-10);
-
     const options = {
       key: RAZORPAY_KEY,
       amount: Math.round(order.amount * 100),
@@ -110,30 +107,7 @@ const PlaceOrder = () => {
       prefill: {
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
-        contact: rawPhone,
-      },
-      // Open UPI tab by default
-      config: {
-        display: {
-          blocks: {
-            upi: {
-              name: "Pay via UPI",
-              instruments: [
-                { method: "upi" },
-              ],
-            },
-            other: {
-              name: "Other Payment Methods",
-              instruments: [
-                { method: "card" },
-                { method: "netbanking" },
-                { method: "wallet" },
-              ],
-            },
-          },
-          sequence: ["block.upi", "block.other"],
-          preferences: { show_default_blocks: false },
-        },
+        contact: data.phoneNumber,
       },
       theme: { color: "#ff6b35" },
       modal: {
